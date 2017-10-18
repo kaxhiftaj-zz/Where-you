@@ -1,6 +1,7 @@
 package com.whereyou.techease.fragments;
 
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.util.Log;
@@ -40,6 +41,7 @@ public class EmailVerificationFragment extends Fragment {
     EditText etEmailForgetPassword;
     SweetAlertDialog pDialog;
     TextView tvSkipLogin;
+    Typeface t1;
 
     public EmailVerificationFragment() {
         // Required empty public constructor
@@ -74,6 +76,9 @@ public class EmailVerificationFragment extends Fragment {
         pDialog.getProgressHelper().setBarColor(Color.parseColor("#179e99"));
         pDialog.setTitleText("Sending email");
         pDialog.setCancelable(false);
+
+        t1= Typeface.createFromAsset(getActivity().getAssets(), "fonts/Av.otf");
+
         etEmailForgetPassword = (EditText) view.findViewById(R.id.et_email_forget);
         btnSendEmail = (Button) view.findViewById(R.id.btn_send_email);
         btnSendEmail.setOnClickListener(new View.OnClickListener() {
@@ -83,6 +88,11 @@ public class EmailVerificationFragment extends Fragment {
             }
         });
         tvSkipLogin = (TextView)view.findViewById(R.id.tv_skip_login);
+
+        etEmailForgetPassword.setTypeface(t1);
+        btnSendEmail.setTypeface(t1);
+        tvSkipLogin.setTypeface(t1);
+
         tvSkipLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

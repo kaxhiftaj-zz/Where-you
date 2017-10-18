@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -45,6 +46,7 @@ public class LoginFragment extends Fragment {
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     ImageView ivBackToLogin;
+    Typeface t1;
 
     public LoginFragment() {
         // Required empty public constructor
@@ -67,11 +69,20 @@ public class LoginFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_login, container, false);
         sharedPreferences = getActivity().getSharedPreferences(Configuration.MY_PREF, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
+
+        t1= Typeface.createFromAsset(getActivity().getAssets(), "fonts/Av.otf");
+
         etEmail = (EditText) view.findViewById(R.id.et_email_login);
         etPassword = (EditText) view.findViewById(R.id.et_password_login);
         tvForgetPassword = (TextView) view.findViewById(R.id.tv_forget_password);
         btnLogin = (Button) view.findViewById(R.id.btn_login);
         tvRegisterHere = (TextView) view.findViewById(R.id.tv_register_here);
+
+        etEmail.setTypeface(t1);
+        etPassword.setTypeface(t1);
+        btnLogin.setTypeface(t1);
+        tvForgetPassword.setTypeface(t1);
+
         tvRegisterHere.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/main_app_bg"
+    android:background="@drawable/resizebg"
     android:orientation="vertical"
     tools:context="com.whereyou.techease.fragments.LoginFragment">
 
@@ -215,11 +215,31 @@
                     android:textColorHint="#fff" />
 
             </LinearLayout>
-
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.1px"
                 android:background="#fff" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="26dp">
+                <CheckBox
+                    android:id="@+id/cb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="#eee"
+                   />
+                <TextView
+                    android:id="@+id/tvTerms"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Terms and Conditions"
+                    android:textColor="#fff"
+                    android:textSize="18dp"
+                    android:layout_marginLeft="28dp"/>
+            </LinearLayout>
 
 
 
@@ -228,7 +248,7 @@
                 android:id="@+id/btn_next_signup"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="25dp"
                 android:textAllCaps="false"
                 android:background="#fff"
                 android:text="Register"

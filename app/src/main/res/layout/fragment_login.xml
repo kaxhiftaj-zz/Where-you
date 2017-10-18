@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/main_app_bg"
+    android:background="@drawable/resizebg"
     tools:context="com.whereyou.techease.fragments.LoginFragment">
 
     <TableLayout
@@ -98,7 +98,7 @@
             android:layout_marginTop="10dp"
             android:gravity="right"
             android:paddingRight="30dp"
-            android:text="Foget Password"
+            android:text="Foget Password?"
             android:textColor="#fff" />
 
         <Button

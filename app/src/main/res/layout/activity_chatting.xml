@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/resizebg"
+    android:orientation="vertical"
+    tools:context="com.whereyou.techease.activities.Chatting">
+    <ScrollView
+        android:id="@+id/scroll_signIn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp"
+            >
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/login_username_icon"
+                android:layout_marginLeft="15dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="60dp"
+                android:layout_marginLeft="15dp"
+                android:padding="10dp"
+                android:layout_gravity="top"
+                android:background="#fff"
+                android:text="Hello this is adam"/>
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="10dp"
+                android:background="#fff"
+                android:padding="10dp"
+                android:text="Hello this is a message"
+                android:layout_alignParentTop="true"
+                android:layout_toStartOf="@+id/imageView2" />
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/login_username_icon"
+                android:id="@+id/imageView2" />
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="15dp">
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/login_username_icon"
+                android:layout_marginLeft="15dp"/>
+            <ImageView
+                android:layout_width="150dp"
+                android:layout_height="100dp"
+                android:layout_marginLeft="15dp"
+                android:background="@mipmap/ic_launcher"/>
+        </LinearLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="10dp"
+                android:background="#fff"
+                android:padding="10dp"
+                android:text="Hello this is a message"
+                android:layout_alignBottom="@+id/imageView5"
+                android:layout_toStartOf="@+id/imageView5" />
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/login_username_icon"
+                android:id="@+id/imageView5" />
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            >
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/login_username_icon"
+                android:layout_marginLeft="15dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="60dp"
+                android:layout_marginLeft="15dp"
+                android:padding="10dp"
+                android:layout_gravity="top"
+                android:background="#fff"
+                android:text="Ok"/>
+        </LinearLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_gravity="right">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:background="#fff"
+                android:padding="10dp"
+                android:text="Hello this is a message"
+                android:layout_alignParentTop="true"
+                android:layout_toStartOf="@+id/imageView3"
+                android:layout_marginEnd="12dp" />
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/login_username_icon"
+                android:id="@+id/imageView3" />
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp"
+            >
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/login_username_icon"
+                android:layout_marginLeft="15dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="60dp"
+                android:layout_marginLeft="15dp"
+                android:padding="10dp"
+                android:layout_gravity="top"
+                android:background="#fff"
+                android:text="Hello this is adam"/>
+        </LinearLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:gravity="bottom"
+            android:background="#fff"
+            android:layout_below="@+id/scroll_signIn"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="bottom">
+
+            <EditText
+                android:id="@+id/et"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:hint="Type Text message"
+                android:padding="5dp"
+                android:layout_marginLeft="20dp"
+                android:gravity="bottom"
+                android:layout_alignTop="@+id/imageView4"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="20dp" />
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="11dp"
+                android:background="@drawable/camera"
+                android:id="@+id/imageView4" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    </ScrollView>
+</LinearLayout>
