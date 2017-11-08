@@ -47,6 +47,7 @@ public class LoginFragment extends Fragment {
     SharedPreferences.Editor editor;
     ImageView ivBackToLogin;
     Typeface t1;
+    String strAPIToken ;
 
     public LoginFragment() {
         // Required empty public constructor
@@ -125,21 +126,21 @@ public class LoginFragment extends Fragment {
                 , new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
+
                 Log.d("zma response login", response);
                 if (response.contains("200")) {
                     try {
                         DialogUtils.sweetAlertDialog.dismiss();
-                        JSONObject jsonObject = new JSONObject(response).getJSONObject("message");
-                        String strAPIToken = jsonObject.getString("api_token");
+                        JSONObject jsonObject = new JSONObject(response).getJSONObject("data");
+                         strAPIToken = jsonObject.getString("api_token");
                         editor.putString("api_token", strAPIToken).commit();
                         Log.d("zma token", String.valueOf(strAPIToken));
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
                     startActivity(new Intent(getActivity(), MainActivity.class));
-                    Toast.makeText(getActivity(), "Login successful", Toast.LENGTH_SHORT).show();
-//                    fragment = new MyServicesFragment();
-//                    getFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack("tag").commit();
+                    Toast.makeText(getActivity(), strAPIToken, Toast.LENGTH_SHORT).show();
+
                 } else {
                     DialogUtils.sweetAlertDialog.dismiss();
                    DialogUtils.showWarningAlertDialog(getActivity(), "Something went wrong");

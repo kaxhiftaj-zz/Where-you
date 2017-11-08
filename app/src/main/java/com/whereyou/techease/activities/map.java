@@ -1,13 +1,16 @@
 package com.whereyou.techease.activities;
 
-import android.content.DialogInterface;
+import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
+import android.content.SharedPreferences;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.support.v7.app.AlertDialog;
 import android.util.Log;
-import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
@@ -26,6 +29,17 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.whereyou.techease.R;
+import com.whereyou.techease.controllers.CustomDialogClass;
+import com.whereyou.techease.utils.Configuration;
+
+import java.io.IOException;
+import java.text.Normalizer;
+import java.util.List;
+import java.util.Locale;
+import java.util.StringTokenizer;
+
+import io.nlopez.smartlocation.OnLocationUpdatedListener;
+import io.nlopez.smartlocation.SmartLocation;
 
 public class map extends FragmentActivity implements OnMapReadyCallback {
 
@@ -33,18 +47,65 @@ public class map extends FragmentActivity implements OnMapReadyCallback {
     int PLACE_AUTOCOMPLETE_REQUEST_CODE = 1;
     Place place;
     LatLng latLng;
-    DatabaseReference databaseReference;
-    private FirebaseAuth auth;
+    public static String loclat = "";
+    public static String loclong = "";
+    public static String curlat = "";
+    public static String curlong = "";
+    public static String token = "";
+    public static String locname = "";
+
+    String api_token;
+    double lat,lon ;
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
 
-//        Firebase.setAndroidContext(this);
-//        databaseReference= FirebaseDatabase.getInstance().getReference();
+        sharedPreferences = this.getSharedPreferences(Configuration.MY_PREF, Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+        api_token = sharedPreferences.getString("api_token","");
+        Log.d("api_token" , api_token);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            requestPermissions(new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION,
+                    android.Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
+        }
+        SmartLocation.with(map.this).location()
+                .start(new OnLocationUpdatedListener() {
 
-        //initializing firebae
-     //   auth=FirebaseAuth.getInstance();
+                    @Override
+                    public void onLocationUpdated(Location location) {
+                        lat = location.getLatitude();
+                        lon = location.getLongitude();
+                        Log.d("Location : ", "" + lat + " " + lon);
+                        Geocoder geoCoder = new Geocoder(map.this, Locale.getDefault());
+                        StringBuilder builder = new StringBuilder();
+                        try {
+                            List<Address> address = geoCoder.getFromLocation(lat, lon, 1);
+                            int maxLines = address.get(0).getMaxAddressLineIndex();
+                            for (int i = 0; i < maxLines; i++) {
+                                String addressStr = address.get(0).getAddressLine(i);
+                                String city = address.get(0).getLocality();
+                                String state = address.get(0).getAdminArea();
+                                String country = address.get(0).getCountryName();
+                                String postalCode = address.get(0).getPostalCode();
+                                String knownName = address.get(0).getFeatureName();
+                                String subadmin = address.get(0).getSubLocality();
+                                Log.d("zma city 2", "city " + city + "\nstate " + state + "\n country " +
+                                        country + "\n postal code " + postalCode + "\nknow name " + knownName + "get sub admin area" + subadmin);
+                                builder.append(addressStr);
+                                builder.append(" ");
+                            }
+
+                        } catch (IOException e) {
+                        } catch (NullPointerException e) {
+                        }
+
+                    }
+                });
+
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -58,10 +119,10 @@ public class map extends FragmentActivity implements OnMapReadyCallback {
         autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
             @Override
             public void onPlaceSelected(Place place) {
-             latLng=place.getLatLng();
+
+                latLng=place.getLatLng();
                 MyMethod(mMap,latLng);
-                // TODO: Get info about the selected place.
-                Log.i("Place", "Place: " + place.getName());
+
             }
 
             @Override
@@ -86,11 +147,10 @@ public class map extends FragmentActivity implements OnMapReadyCallback {
             if (resultCode == RESULT_OK) {
                  place = PlaceAutocomplete.getPlace(this, data);
                 latLng = place.getLatLng();
-//                AttributesHolder attributesHolder=new AttributesHolder(latLng);
-//                databaseReference.child("location").setValue(attributesHolder);
+
                 MyMethod(mMap,place.getLatLng());
 
-                Log.i("Searched", "Place: " + place.getName());
+
             } else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {
                 Status status = PlaceAutocomplete.getStatus(this, data);
                 // TODO: Handle the error.
@@ -114,42 +174,22 @@ public class map extends FragmentActivity implements OnMapReadyCallback {
         mMap.animateCamera(CameraUpdateFactory.zoomTo(10));
 
     }
-    public void MyMethod(GoogleMap googleMap, LatLng latLng) {
+    public void MyMethod(GoogleMap googleMap, final LatLng latLng) {
         mMap=googleMap;
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
-                final AlertDialog.Builder builder = new AlertDialog.Builder(map.this);
-                builder.setTitle("Dialog Box");
-                builder.setMessage("This is the plain text...!");
-                builder.setCancelable(true);
-                builder.setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                CustomDialogClass cdd=new CustomDialogClass(map.this);
 
-                    @Override
-                    public void onClick(DialogInterface arg0, int arg1) {
-                       builder.setCancelable(true);
-                    }
-                });
-                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                                    builder.setCancelable(true);
-                    }
-                });
-               builder.setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                       builder.setCancelable(true);
-                    }
-                });
-                AlertDialog alertDialog = builder.create();
-                alertDialog.show();
-                Button nbutton = alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE);
-                nbutton.setTextColor(Color.MAGENTA);
-                Button pbutton = alertDialog.getButton(DialogInterface.BUTTON_POSITIVE);
-                pbutton.setTextColor(Color.MAGENTA);
-                Button cButton=alertDialog.getButton(DialogInterface.BUTTON_NEUTRAL);
-                cButton.setTextColor(Color.MAGENTA);
+                loclat = String.valueOf(latLng.latitude);
+                loclong = String.valueOf(latLng.longitude);
+                locname = String.valueOf(place.getName());
+                curlat = String.valueOf(lat) ;
+                curlong = String.valueOf(lon);
+                Toast.makeText(map.this, curlong, Toast.LENGTH_SHORT).show();
+                token = api_token;
+
+                cdd.show();
                 return false;
             }
 

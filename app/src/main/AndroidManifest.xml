@@ -16,7 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.whereyou.techease.activities.FullscreenActivity"
+            android:name=".activities.FullscreenActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:theme="@style/FullscreenTheme">
             <intent-filter>
@@ -26,25 +26,34 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.whereyou.techease.activities.MainActivity"
+            android:name=".activities.MainActivity"
             android:label="@string/title_activity_main"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".activities.Chatting"
-            android:theme="@style/AppTheme"/>
-        <activity android:name=".activities.DummyText"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.Chatting"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".activities.DummyText"
+            android:theme="@style/AppTheme.NoActionBar" />
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyAmLskHw2NigA9qZNqKxSV6AWgeutEk9BE" />
 
         <activity
             android:name=".activities.map"
-            android:label="Map"></activity>
-        <activity android:name=".activities.Notifications"
-            android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".activities.MyInbox"
-            android:theme="@style/AppTheme"/>
+            android:label="Map" >
 
+
+        </activity>
+
+        <activity
+            android:name=".activities.Notifications"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.MyInbox"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".activities.Comments"></activity>
     </application>
 
 </manifest>
