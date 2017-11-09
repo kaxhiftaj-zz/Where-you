@@ -2,6 +2,9 @@ package com.whereyou.techease.activities;
 
 import android.annotation.SuppressLint;
 import android.app.Fragment;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.ActionBar;
@@ -11,6 +14,7 @@ import android.view.View;
 
 import com.whereyou.techease.R;
 import com.whereyou.techease.fragments.RegistrationFragment;
+import com.whereyou.techease.utils.Configuration;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -89,6 +93,19 @@ public class FullscreenActivity extends AppCompatActivity {
         setContentView(R.layout.activity_fullscreen);
 //        Uncomment this two lines to open fragment for saving services in database
         // you can move that code to the service activity too
+
+        SharedPreferences sharedPreferences;
+        SharedPreferences.Editor editor;
+        String api_token ;
+        sharedPreferences = this.getSharedPreferences(Configuration.MY_PREF, Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+        api_token = sharedPreferences.getString("api_token","");
+
+        if (!api_token.equals("")){
+
+            startActivity(new Intent(FullscreenActivity.this, MainActivity.class));
+        }
+
         Fragment fragment = new RegistrationFragment();
         Bundle bundle =  new Bundle();
         fragment.setArguments(bundle);

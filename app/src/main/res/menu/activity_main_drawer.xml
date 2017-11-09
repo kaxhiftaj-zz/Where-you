@@ -43,4 +43,13 @@
 
 
 
+    <group android:id="@+id/g6"
+        android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/allComments"
+            android:icon="@drawable/comment"
+            android:title="" />
+    </group>
+
 </menu>
