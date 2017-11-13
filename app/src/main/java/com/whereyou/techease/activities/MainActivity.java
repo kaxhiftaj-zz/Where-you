@@ -77,27 +77,26 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.Map) {
             Intent intent=new Intent(MainActivity.this,map.class);
             startActivity(intent);
-            finish();
+
 
         } else if (id == R.id.Inbox) {
             Intent intent=new Intent(MainActivity.this,MyInbox.class);
             startActivity(intent);
-            finish();
 
         } else if (id == R.id.Notifications) {
             Intent intent=new Intent(MainActivity.this,Notifications.class);
             startActivity(intent);
-            finish();
+
 
         }else if (id == R.id.Comments) {
             Intent intent=new Intent(MainActivity.this,Comments.class);
             startActivity(intent);
-            finish();
+
 
         }else if (id == R.id.allComments) {
             Intent intent=new Intent(MainActivity.this, AllComments.class);
             startActivity(intent);
-            finish();
+
 
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

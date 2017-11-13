@@ -45,16 +45,11 @@ public class AllCommentsAdapter extends RecyclerView.Adapter<AllCommentsAdapter.
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
         final Contestents conest = contestents.get(position);
 
-        String s = conest.getLoctionDistance();
-        if (! s.equals("")) {
-            Double d = Double.parseDouble(s);
-
-            if (d < 62.00) {
                 holder.locationName.setText(conest.getLocationName());
-                holder.locationDistance.setText(d + " miles");
+                holder.locationDistance.setText(conest.getLoctionDistance() + " miles");
                 holder.locationComment.setText(conest.getLocationComment());
-            }
-        }
+
+
     }
 
 

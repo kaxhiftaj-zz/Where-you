@@ -60,7 +60,6 @@ public class AllComments extends AppCompatActivity {
         api_token = sharedPreferences.getString("api_token","");
         recyclerView = (RecyclerView) findViewById(R.id.myNews);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        apiCall();
         commentsList = new ArrayList<>();
         adapterComments = new AllCommentsAdapter(this, commentsList);
         recyclerView.setAdapter(adapterComments);
@@ -80,7 +79,7 @@ public class AllComments extends AppCompatActivity {
 
                         lat = location.getLatitude();
                         lon = location.getLongitude();
-                  //      Toast.makeText(AllComments.this, String.valueOf(lat)+","+String.valueOf(lon), Toast.LENGTH_SHORT).show();
+                        apiCall(lat, lon );
 
                     }
                 });
@@ -89,7 +88,7 @@ public class AllComments extends AppCompatActivity {
 
 
 
-    public void apiCall() {
+    public void apiCall(Double lat , Double lon) {
         StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://whereyou.techeasesol.com/api/v1/places/all?api_token="+api_token+"&latitude="+lat+"&longitude="+lon
                 , new Response.Listener<String>() {
             @Override
@@ -102,19 +101,11 @@ public class AllComments extends AppCompatActivity {
                         JSONArray jsonArray = jsonObject.getJSONArray("data");
                         for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject temp = jsonArray.getJSONObject(i);
-                            Contestents contes = new Contestents();
-
-                            String s = temp.getString("distance");
-
-                                Double d = Double.parseDouble(s);
-
-                                if (d < 65.00) {
+                                     Contestents contes = new Contestents();
                                     contes.setLocationName(temp.getString("loc_name"));
                                     contes.setLocationComment(temp.getString("comment"));
                                     contes.setLoctionDistance(temp.getString("distance"));
                                     commentsList.add(contes);
-
-                                }
 
                             }
                         adapterComments.notifyDataSetChanged();
@@ -131,8 +122,7 @@ public class AllComments extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                //DialogUtils.sweetAlertDialog.dismiss();
-                // DialogUtils.showErrorTypeAlertDialog(getActivity(), "Server error");
+
                 Log.d("error" , String.valueOf(error.getCause()));
 
             }
